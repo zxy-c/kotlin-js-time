@@ -13,6 +13,19 @@ class SoDateTime(
         fun now(): SoDateTime {
             return SoDateTime(Date())
         }
+
+        fun of(soDate: SoDate, soTime: SoTime): SoDateTime {
+            return SoDateTime(
+                Date(
+                    soDate.year,
+                    soDate.month - 1,
+                    soDate.day,
+                    soTime.hours,
+                    soTime.minutes,
+                    soTime.seconds
+                )
+            )
+        }
     }
 
     constructor(date: String) : this(Date(date))
@@ -38,5 +51,18 @@ class SoDateTime(
     override fun toString(): String {
         return this.format()
     }
+
+    fun plusDay(day: Int): SoDateTime {
+        return SoDateTime.of(this.soDate.plusDay(day), this.soTime)
+    }
+
+    fun plusHours(hours: Int): SoDateTime {
+        return SoDateTime(date.getTime() + 1000 * 60 * 60 * hours)
+    }
+
+    val hours: Int
+        get() {
+            return this.soTime.hours
+        }
 
 }

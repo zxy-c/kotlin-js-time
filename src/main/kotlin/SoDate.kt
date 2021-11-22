@@ -65,6 +65,9 @@ class SoDate(date: Date) {
         return this.format()
     }
 
+    fun toStartAtDay(): SoDateTime {
+        return SoDateTime.of(this,SoTime.of())
+    }
 
 }
 
